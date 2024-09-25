@@ -1,5 +1,7 @@
 FROM bitnami/wordpress-nginx:latest AS base
 
+SHELL ["/bin/bash", "-c"]
+
 RUN apt-get update && \
     apt-get install -y \
     openssh-server;
