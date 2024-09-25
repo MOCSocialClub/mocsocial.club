@@ -3,6 +3,10 @@
 
 name: Build & Deploy Container App
 
+concurrency: 
+  group: Container App
+  cancel-in-progress: true
+
 on:
   push:
     branches:
