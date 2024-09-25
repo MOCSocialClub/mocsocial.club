@@ -30,10 +30,10 @@ foreach ($_SERVER as $key => $value) {
         continue;
     }
     
-    $connectstr_dbhost = preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbname = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbusername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbpassword = preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
+    $connectstr_dbhost = getenv("AZURE_MYSQL_HOST"); // preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbname = getenv("AZURE_MYSQL_DBNAME"); // preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbusername = getenv("AZURE_MYSQL_USERNAME"); // preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbpassword = getenv("AZURE_MYSQL_PASSWORD"); // preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
 }
 
 
@@ -76,14 +76,23 @@ if (strtolower($mysql_sslconnect) != 'false' && !is_numeric(strpos($connectstr_d
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'put your unique phrase here');
-define('SECURE_AUTH_KEY',  'put your unique phrase here');
-define('LOGGED_IN_KEY',    'put your unique phrase here');
-define('NONCE_KEY',        'put your unique phrase here');
-define('AUTH_SALT',        'put your unique phrase here');
-define('SECURE_AUTH_SALT', 'put your unique phrase here');
-define('LOGGED_IN_SALT',   'put your unique phrase here');
-define('NONCE_SALT',       'put your unique phrase here');
+$AUTH_KEY = getenv('AUTH_KEY') ?? 'put your unique phrase here';
+$SECURE_AUTH_KEY = getenv('SECURE_AUTH_KEY') ?? 'put your unique phrase here';
+$LOGGED_IN_KEY = getenv('LOGGED_IN_KEY') ?? 'put your unique phrase here';
+$NONCE_KEY = getenv('NONCE_KEY') ?? 'put your unique phrase here';
+$AUTH_SALT = getenv('AUTH_SALT') ?? 'put your unique phrase here';
+$SECURE_AUTH_SALT = getenv('SECURE_AUTH_SALT') ?? 'put your unique phrase here';
+$LOGGED_IN_SALT = getenv('LOGGED_IN_SALT') ?? 'put your unique phrase here';
+$NONCE_SALT = getenv('NONCE_SALT') ?? 'put your unique phrase here';
+
+define('AUTH_KEY',         $AUTH_KEY);
+define('SECURE_AUTH_KEY',  $SECURE_AUTH_KEY);
+define('LOGGED_IN_KEY',    $LOGGED_IN_KEY);
+define('NONCE_KEY',        $NONCE_KEY);
+define('AUTH_SALT',        $AUTH_SALT);
+define('SECURE_AUTH_SALT', $SECURE_AUTH_SALT);
+define('LOGGED_IN_SALT',   $LOGGED_IN_SALT);
+define('NONCE_SALT',       $NONCE_SALT);
 
 
 
