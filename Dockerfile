@@ -2,7 +2,8 @@ FROM bitnami/wordpress-nginx:latest AS base
 
 SHELL ["/bin/bash", "-c"]
 
-RUN apt-get update && \
+RUN mkdir -p /var/lib/apt/lists/partial && \
+    apt-get update && \
     apt-get install -y \
     openssh-server;
     
