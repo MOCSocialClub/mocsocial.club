@@ -7,4 +7,4 @@ bash show-branding
 /usr/sbin/sshd -D &
 
 # Start the WordPress service
-bash /opt/bitnami/scripts/wordpress/entrypoint.sh
+bash "/opt/bitnami/scripts/wordpress/entrypoint.sh"
