@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+bash show-branding
+
+# Start the SSH service
+/usr/sbin/sshd -D &
+
+# Start the WordPress service
+bash /opt/bitnami/scripts/wordpress/entrypoint.sh
