@@ -18,6 +18,11 @@
  * @package WordPress
  */
 
+function parseBoolean($string) {
+    $string = strtolower($string);  // Normalize the string to lowercase
+    return in_array($string, ["true", "1", "on", "yes"], true);
+}
+
 //Using environment variables for DB connection information
 
 $connectstr_dbhost = '';
@@ -56,7 +61,7 @@ define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
-define('WP_ALLOW_REPAIR', getenv("WP_ALLOW_REPAIR"));
+define('WP_ALLOW_REPAIR', parseBoolean(getenv("WP_ALLOW_REPAIR")));
 
 /** Enabling support for connecting external MYSQL over SSL*/
 $mysql_sslconnect = (getenv('DB_SSL_CONNECTION')) ? getenv('DB_SSL_CONNECTION') : 'true';
@@ -103,7 +108,7 @@ potentially crash the site. Disabling these also provides an additional layer of
 well-privileged user account.
 Note : If your plugin or theme you use with your app requires editing of the files , comment the line below for 'DISALLOW_FILE_EDIT'
 */
-define('DISALLOW_FILE_EDIT', true);
+define('DISALLOW_FILE_EDIT', parseBoolean(getenv("DISALLOW_FILE_EDIT")));
 
 
 /**#@-*/
@@ -128,7 +133,7 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', parseBoolean(getenv("WP_DEBUG")) );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
