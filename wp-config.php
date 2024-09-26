@@ -25,16 +25,16 @@ $connectstr_dbname = '';
 $connectstr_dbusername = '';
 $connectstr_dbpassword = '';
 
-foreach ($_SERVER as $key => $value) {
-    if (strpos($key, "MYSQLCONNSTR_") !== 0) {
-        continue;
-    }
+// foreach ($_SERVER as $key => $value) {
+//     if (strpos($key, "MYSQLCONNSTR_") !== 0) {
+//         continue;
+//     }
     
     $connectstr_dbhost = getenv("AZURE_MYSQL_HOST"); // preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
     $connectstr_dbname = getenv("AZURE_MYSQL_DBNAME"); // preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
     $connectstr_dbusername = getenv("AZURE_MYSQL_USERNAME"); // preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
     $connectstr_dbpassword = getenv("AZURE_MYSQL_PASSWORD"); // preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
-}
+// }
 
 
 // ** MySQL settings - You can get this info from your web host ** //
