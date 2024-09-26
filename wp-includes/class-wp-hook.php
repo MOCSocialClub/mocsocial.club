@@ -495,6 +495,7 @@ final class WP_Hook implements Iterator, ArrayAccess {
 	 *
 	 * @return array Of callbacks at current priority.
 	 */
+	#[\ReturnTypeWillChange] 
 	public function current() {
 		return current( $this->callbacks );
 	}
