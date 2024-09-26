@@ -15,6 +15,23 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     curl https://raw.githubusercontent.com/wp-cli/wp-cli/v2.11.0/utils/wp-completion.bash -o /etc/bash_completion.d/wp-completion.bash; \
     echo "source /etc/bash_completion.d/wp-completion.bash" >> ~/.bashrc;
 
-COPY root /
+RUN apt-get install -y \
+    supervisor && \
+    mkdir -p /var/log/nginx \
+    /var/log/supervisor \
+    /var/log/php \
+    /var/log/php-fpm \
+    /var/log/sshd \
+    /var/log/wordpress \
+    /run/sshd \
+    /bitnami/wordpress \
+    /bitnami/wordpress/wp-content \
+    /bitnami/wordpress/wp-content/uploads \
+    /bitnami/nginx/conf/vhosts
 
-ENTRYPOINT [ "bash", "/usr/local/sbin/wordpress-with-sshd-entrypoint" ]
+
+COPY root /
+COPY . /opt/bitnami/wordpress
+COPY ./bitnami /bitnami
+
+# ENTRYPOINT [ "/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf" ]

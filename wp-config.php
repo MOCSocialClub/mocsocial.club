@@ -56,7 +56,7 @@ define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
-
+define('WP_ALLOW_REPAIR', getenv("WP_ALLOW_REPAIR"));
 
 /** Enabling support for connecting external MYSQL over SSL*/
 $mysql_sslconnect = (getenv('DB_SSL_CONNECTION')) ? getenv('DB_SSL_CONNECTION') : 'true';
