@@ -67,6 +67,7 @@ jobs:
           app-name: 'mocsocialclubviacode'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4C4187791D0D4B11A91527BF59D573AE }}
-          package: .
+          package: release.zip
           clean: true
           restart: true
+          type: zip
