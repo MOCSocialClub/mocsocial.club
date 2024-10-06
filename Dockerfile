@@ -199,12 +199,14 @@ VOLUME /var/www/html
 COPY --chown=www-data:www-data wp-config-docker.php /usr/src/wordpress/
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY ./root /
+COPY . /usr/src/wordpress
 RUN echo "root:Docker!" | chpasswd
 ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp-cli.phar
 RUN \
 	apt-get update && apt-get install -y less nano && \
 	chmod +x /usr/local/bin/* && \
 	chmod +x /usr/local/sbin/*
+COPY --from=php-fpm /usr/local/etc/** /usr/local/etc/
 
 ENTRYPOINT [ "/bin/bash", "/usr/local/bin/docker-entrypoint.sh" ]
 CMD ["php-fpm"]

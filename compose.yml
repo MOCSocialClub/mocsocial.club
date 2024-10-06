@@ -3,7 +3,8 @@ services:
   web: 
     container_name: wordpress
     # dockerfile: ./Dockerfile
-    build: .
+    # build: .
+    image: ghcr.io/mocsocialclub/wordpress:latest
     ports: 
       - 8080:8080
       - 2222:2222
