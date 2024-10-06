@@ -206,6 +206,7 @@ RUN \
 	apt-get update && apt-get install -y less nano && \
 	chmod +x /usr/local/bin/* && \
 	chmod +x /usr/local/sbin/*
+COPY --from=php-fpm /usr/local/etc/** /usr/local/etc/
 
 ENTRYPOINT [ "/bin/bash", "/usr/local/bin/docker-entrypoint.sh" ]
 CMD ["php-fpm"]
