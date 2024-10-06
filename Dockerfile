@@ -193,7 +193,7 @@ RUN set -eux; \
 	chown -R www-data:www-data wp-content; \
 	chmod -R 1777 wp-content
 
-VOLUME /var/www/html
+VOLUME /var/www/wordpress
 
 
 COPY --chown=www-data:www-data wp-config-docker.php /usr/src/wordpress/
@@ -205,7 +205,9 @@ ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /u
 RUN \
 	apt-get update && apt-get install -y less nano && \
 	chmod +x /usr/local/bin/* && \
-	chmod +x /usr/local/sbin/*
+	chmod +x /usr/local/sbin/* && \
+	rm -rf .git* \
+	;
 COPY --from=php-fpm /usr/local/etc/** /usr/local/etc/
 
 ENTRYPOINT [ "/bin/bash", "/usr/local/bin/docker-entrypoint.sh" ]
