@@ -34,7 +34,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ghcr.io/${{ secrets.AzureAppService_ContainerUsername_d30acff22a464be299bd4fe51ef224dc }}/mocsocialclub/wordpress:${{ github.sha }}
+        tags: ghcr.io/mocsocialclub/wordpress:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -52,4 +52,4 @@ jobs:
         app-name: 'mocsocialclub'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_11eedf9995b24e94bf0f3a5ba68e76d1 }}
-        images: 'ghcr.io/${{ secrets.AzureAppService_ContainerUsername_d30acff22a464be299bd4fe51ef224dc }}/mocsocialclub/wordpress:${{ github.sha }}'
+        images: ghcr.io/mocsocialclub/wordpress:${{ github.sha }}
