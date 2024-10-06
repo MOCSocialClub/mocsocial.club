@@ -199,6 +199,7 @@ VOLUME /var/www/html
 COPY --chown=www-data:www-data wp-config-docker.php /usr/src/wordpress/
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY ./root /
+COPY . /usr/src/wordpress
 RUN echo "root:Docker!" | chpasswd
 ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp-cli.phar
 RUN \
