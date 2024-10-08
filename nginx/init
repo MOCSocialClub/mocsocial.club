@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp /home/site/nginx/** /etc/nginx/
+nginx -s reload
