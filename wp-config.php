@@ -34,10 +34,10 @@ $connectstr_dbname = '';
 $connectstr_dbusername = '';
 $connectstr_dbpassword = '';
 
-$connectstr_dbhost = getenv('AZURE_MYSQL_HOST'); // preg_replace('/^.*Data Source=(.+?);.*$/', '\\1', $value);
-$connectstr_dbname = getenv('AZURE_MYSQL_DBNAME'); // preg_replace('/^.*Database=(.+?);.*$/', '\\1', $value);
-$connectstr_dbusername = getenv('AZURE_MYSQL_USERNAME'); // preg_replace('/^.*User Id=(.+?);.*$/', '\\1', $value);
-$connectstr_dbpassword = getenv('AZURE_MYSQL_PASSWORD'); // preg_replace('/^.*Password=(.+?)$/', '\\1', $value);
+$connectstr_dbhost = getenv('AZURE_MYSQL_HOST') || getenv('WORDPRESS_DATABASE_HOST'); // preg_replace('/^.*Data Source=(.+?);.*$/', '\\1', $value);
+$connectstr_dbname = getenv('AZURE_MYSQL_DBNAME') || getenv('AZURE_MYSQL_DBNAME'); // preg_replace('/^.*Database=(.+?);.*$/', '\\1', $value);
+$connectstr_dbusername = getenv('AZURE_MYSQL_USERNAME') || getenv('AZURE_MYSQL_USERNAME'); // preg_replace('/^.*User Id=(.+?);.*$/', '\\1', $value);
+$connectstr_dbpassword = getenv('AZURE_MYSQL_PASSWORD') || getenv('AZURE_MYSQL_PASSWORD'); // preg_replace('/^.*Password=(.+?)$/', '\\1', $value);
 
 
 // ** MySQL settings - You can get this info from your web host ** //
