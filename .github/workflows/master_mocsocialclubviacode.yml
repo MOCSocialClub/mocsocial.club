@@ -4,13 +4,13 @@
 name: Build & Deploy PHP App
 
 concurrency:
-  group: PHP App
+  group: ${{ github.workflow }}
   cancel-in-progress: true
 
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -57,11 +57,11 @@ jobs:
         with:
           name: php-app
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
+      # - name: Unzip artifact for deployment
+      #   run: unzip release.zip
 
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'mocsocialclubviacode'

@@ -1,0 +1,18 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "antitwink.mysql.database.azure.com",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "MOC Social Club",
+            "database": "mocsocialclubwp",
+            "username": "iamtheantitwink",
+            "password": "0372edf7-d897-43f3-90af-409e9a942514"
+        }
+    ]
+}

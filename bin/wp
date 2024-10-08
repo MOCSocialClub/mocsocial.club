@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if ! command -v less &> /dev/null
+then
+    echo "'less' is not installed. Installing..."
+    apt-get update && apt-get install -y less
+fi
+
+./wp-cli.phar "$@" --allow-root

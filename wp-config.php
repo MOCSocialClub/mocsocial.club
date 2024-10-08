@@ -30,30 +30,24 @@ $connectstr_dbname = '';
 $connectstr_dbusername = '';
 $connectstr_dbpassword = '';
 
-// foreach ($_SERVER as $key => $value) {
-//     if (strpos($key, "MYSQLCONNSTR_") !== 0) {
-//         continue;
-//     }
-    
-    $connectstr_dbhost = getenv("AZURE_MYSQL_HOST"); // preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbname = getenv("AZURE_MYSQL_DBNAME"); // preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbusername = getenv("AZURE_MYSQL_USERNAME"); // preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
-    $connectstr_dbpassword = getenv("AZURE_MYSQL_PASSWORD"); // preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
-// }
+$connectstr_dbhost = getenv('AZURE_MYSQL_HOST'); // preg_replace('/^.*Data Source=(.+?);.*$/', '\\1', $value);
+$connectstr_dbname = getenv('AZURE_MYSQL_DBNAME'); // preg_replace('/^.*Database=(.+?);.*$/', '\\1', $value);
+$connectstr_dbusername = getenv('AZURE_MYSQL_USERNAME'); // preg_replace('/^.*User Id=(.+?);.*$/', '\\1', $value);
+$connectstr_dbpassword = getenv('AZURE_MYSQL_PASSWORD'); // preg_replace('/^.*Password=(.+?)$/', '\\1', $value);
 
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', $connectstr_dbname);
+define('DB_NAME', 'mocsocialclubwp');
 
 /** MySQL database username */
-define('DB_USER', $connectstr_dbusername);
+define('DB_USER', 'iamtheantitwink');
 
 /** MySQL database password */
-define('DB_PASSWORD', $connectstr_dbpassword);
+define('DB_PASSWORD', '0372edf7-d897-43f3-90af-409e9a942514');
 
 /** MySQL hostname */
-define('DB_HOST', $connectstr_dbhost);
+define('DB_HOST', '20.57.80.212');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
@@ -61,13 +55,13 @@ define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
-define('WP_ALLOW_REPAIR', parseBoolean(getenv("WP_ALLOW_REPAIR")));
+define('WP_ALLOW_REPAIR', true);
 
 /** Enabling support for connecting external MYSQL over SSL*/
-$mysql_sslconnect = (getenv('DB_SSL_CONNECTION')) ? getenv('DB_SSL_CONNECTION') : 'true';
-if (strtolower($mysql_sslconnect) != 'false' && !is_numeric(strpos($connectstr_dbhost, "127.0.0.1")) && !is_numeric(strpos(strtolower($connectstr_dbhost), "localhost"))) {
-	define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);
-}
+// $mysql_sslconnect = (getenv('DB_SSL_CONNECTION')) ? getenv('DB_SSL_CONNECTION') : 'true';
+// if (strtolower($mysql_sslconnect) != 'false' && !is_numeric(strpos($connectstr_dbhost, "127.0.0.1")) && !is_numeric(strpos(strtolower($connectstr_dbhost), "localhost"))) {
+// 	define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);
+// }
 
 
 /**#@+
@@ -133,15 +127,17 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', parseBoolean(getenv("WP_DEBUG")) );
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', parseBoolean(getenv("WP_DEBUG_DISPLAY")) );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
 //Relative URLs for swapping across app service deployment slots 
-define('WP_HOME', 'http://'. filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
-define('WP_SITEURL', 'http://'. filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
+define('WP_HOME', 'http://'. filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+define('WP_SITEURL', 'http://'. filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 define('WP_CONTENT_URL', '/wp-content');
-define('DOMAIN_CURRENT_SITE', filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING));
+define('DOMAIN_CURRENT_SITE', filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
 
 /* That's all, stop editing! Happy publishing. */
