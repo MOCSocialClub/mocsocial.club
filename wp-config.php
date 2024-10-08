@@ -18,9 +18,13 @@
  * @package WordPress
  */
 
-function parseBoolean($string) {
+function parseBoolean($string): bool {
     $string = strtolower($string);  // Normalize the string to lowercase
     return in_array($string, ["true", "1", "on", "yes"], true);
+}
+
+function getenv_bool($string): bool {
+    return parseBoolean(getenv($string)) !== false;
 }
 
 //Using environment variables for DB connection information
@@ -38,16 +42,16 @@ $connectstr_dbpassword = getenv('AZURE_MYSQL_PASSWORD'); // preg_replace('/^.*Pa
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'mocsocialclubwp');
+define('DB_NAME', $connectstr_dbname);
 
 /** MySQL database username */
-define('DB_USER', 'iamtheantitwink');
+define('DB_USER', $connectstr_dbusername);
 
 /** MySQL database password */
-define('DB_PASSWORD', '0372edf7-d897-43f3-90af-409e9a942514');
+define('DB_PASSWORD', $connectstr_dbpassword);
 
 /** MySQL hostname */
-define('DB_HOST', '20.57.80.212');
+define('DB_HOST', $connectstr_dbhost);
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
@@ -55,7 +59,7 @@ define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
-define('WP_ALLOW_REPAIR', true);
+define('WP_ALLOW_REPAIR', getenv_bool('WP_ALLOW_REPAIR'));
 
 /** Enabling support for connecting external MYSQL over SSL*/
 // $mysql_sslconnect = (getenv('DB_SSL_CONNECTION')) ? getenv('DB_SSL_CONNECTION') : 'true';
@@ -102,7 +106,7 @@ potentially crash the site. Disabling these also provides an additional layer of
 well-privileged user account.
 Note : If your plugin or theme you use with your app requires editing of the files , comment the line below for 'DISALLOW_FILE_EDIT'
 */
-define('DISALLOW_FILE_EDIT', parseBoolean(getenv("DISALLOW_FILE_EDIT")));
+define('DISALLOW_FILE_EDIT', getenv_bool("DISALLOW_FILE_EDIT"));
 
 
 /**#@-*/
@@ -127,9 +131,9 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', true );
-define( 'WP_DEBUG_LOG', true );
-define( 'WP_DEBUG_DISPLAY', parseBoolean(getenv("WP_DEBUG_DISPLAY")) );
+define( 'WP_DEBUG', getenv_bool('WP_DEBUG') );
+define( 'WP_DEBUG_LOG', getenv_bool('WP_DEBUG_LOG') );
+define( 'WP_DEBUG_DISPLAY', getenv_bool("WP_DEBUG_DISPLAY")) ;
 
 /* Add any custom values between this line and the "stop editing" line. */
 
